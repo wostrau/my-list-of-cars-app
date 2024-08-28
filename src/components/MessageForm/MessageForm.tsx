@@ -10,11 +10,11 @@ import { Box, Typography, TextField, Button } from '@mui/material';
 import { MessageFormProps } from './MessageForm.interfaces';
 
 export const MessageForm: FC<MessageFormProps> = ({ onFormSuccess }) => {
-  const { invalidateQueries } = useQueryClient();
+  const queryClient = useQueryClient();
 
   const { mutateAsync: postMessageMutation } = useMutation({
     mutationFn: postMessageToContactUs,
-    onSuccess: () => invalidateQueries({ queryKey: ['cars'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cars'] }),
   });
 
   const {
@@ -33,6 +33,7 @@ export const MessageForm: FC<MessageFormProps> = ({ onFormSuccess }) => {
         contact: parseInt(data.contact),
       } satisfies PayloadFormData;
       const res = await postMessageMutation(payloadData);
+      console.log('res', res);
 
       if (res) {
         onFormSuccess(res);

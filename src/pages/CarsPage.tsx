@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Box } from '@mui/material';
 import { CarDetails } from '../components/CarDetails';
 import { ListOfCars } from '../components/ListOfCars';
@@ -7,27 +7,22 @@ import { MessageModal } from '../components/MessageModal';
 
 export const CarsPage = () => {
   const [carId, setCarId] = useState<number | null>(null);
-  const carIdRef = useRef<number>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
-  // const handleCarSelect = (carId: number) => {
-  //   setFormSuccess(null);
-  //   setCarId(carId);
-  // };
-  // console.log(carIdRef);
+  const handleCarSelect = (carId: number) => {
+    setFormSuccess(null);
+    setCarId(carId);
+  };
 
   const handleFormSuccess = (message: string) => {
     setFormSuccess(message);
     setIsModalOpen(true);
   };
-  console.log('rerender');
+
   return (
     <Box width={600}>
-      <ListOfCars
-        // onCarSelect={handleCarSelect}
-        Bref={carIdRef}
-      />
+      <ListOfCars onCarSelect={handleCarSelect} />
 
       {carId && (
         <>
