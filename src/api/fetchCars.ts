@@ -8,5 +8,5 @@ export const fetchCars = async (): Promise<Car[]> => {
   }
 
   const data = await res.json();
-  return data.cars.slice(0, 10) as Car[];
+  return data.cars as Car[];
 };

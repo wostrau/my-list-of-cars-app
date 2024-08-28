@@ -1,17 +1,20 @@
 import { FC } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postMessageToContactUs } from '../../api/postMessageToContactUs';
 import { MessageFormData } from '../../interfaces/messageFormData.interface';
 import { PayloadFormData } from '../../interfaces/payloadFormData.interface';
+import { PHONE_NUMBER_VALIDATION } from '../../constants/phoneNumberValidation';
 import { INITIAL_FORM_DATA } from '../../constants/initialFormData';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import { PHONE_NUMBER_VALIDATION } from '../../constants/phoneNumberValidation';
 import { MessageFormProps } from './MessageForm.interfaces';
 
 export const MessageForm: FC<MessageFormProps> = ({ onFormSuccess }) => {
+  const { invalidateQueries } = useQueryClient();
+
   const { mutateAsync: postMessageMutation } = useMutation({
     mutationFn: postMessageToContactUs,
+    onSuccess: () => invalidateQueries({ queryKey: ['cars'] }),
   });
 
   const {

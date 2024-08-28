@@ -1,15 +1,17 @@
-import { FC } from 'react';
-// import Grid from '@mui/material/Grid2';
+import { FC, forwardRef, memo } from 'react';
+import { FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
+import { getRandomCars } from '../../helpers/getRandomCars';
+import { ListOfCarsProps } from './ListOfCars.interfaces';
+import { Car } from '../../interfaces/car.interface';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCars } from '../../api';
-import { FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
-import { Car } from '../../interfaces/car.interface';
-import { ListOfCarsProps } from './ListOfCars.interfaces';
 
-export const ListOfCars: FC<ListOfCarsProps> = ({ onCarSelect }) => {
+export const ListOfCars: FC<ListOfCarsProps> = ({Bref}) => {
   const { status, data, error } = useQuery({
     queryFn: fetchCars,
     queryKey: ['cars'],
+    select: (cars) => getRandomCars(cars),
+    enabled: true,
   });
 
   if (status === 'pending') {
@@ -21,7 +23,10 @@ export const ListOfCars: FC<ListOfCarsProps> = ({ onCarSelect }) => {
   }
 
   return (
-    <RadioGroup onChange={(e) => onCarSelect(parseInt(e.target.value))}>
+    <RadioGroup onChange={(e) => {
+      Bref.current = parseInt(e.target.value)
+console.log(Bref);
+      }}>
       {data?.map((car: Car) => (
         <FormControlLabel
           key={car.id}

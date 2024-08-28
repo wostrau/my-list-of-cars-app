@@ -8,6 +8,7 @@ export const CarDetails: FC<CarDetailsProps> = ({ carId }) => {
   const { data, status, error } = useQuery({
     queryFn: () => fetchCarById(carId),
     queryKey: ['car', carId],
+    enabled: carId !== null,
   });
 
   if (status === 'pending') {
