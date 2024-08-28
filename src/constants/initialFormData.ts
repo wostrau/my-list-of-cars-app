@@ -1,6 +1,6 @@
 import { MessageFormData } from '../interfaces/messageFormData.interface';
 
-export const INITIAL_FORM_DATA_STATE = {
+export const INITIAL_FORM_DATA = {
   firstName: '',
   lastName: '',
   contact: '',

@@ -1,0 +1,1 @@
+export const PHONE_NUMBER_VALIDATION = new RegExp(/^\d{10}$/);

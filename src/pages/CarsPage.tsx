@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Grid from '@mui/material/Grid2';
+import { Box } from '@mui/material';
 import { CarDetails } from '../components/CarDetails';
 import { ListOfCars } from '../components/ListOfCars';
-import { MessageForm } from '../components/MessageFormNew';
+import { MessageForm } from '../components/MessageForm';
 import { MessageModal } from '../components/MessageModal';
 
 export const CarsPage = () => {
@@ -21,10 +21,7 @@ export const CarsPage = () => {
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-    >
+    <Box width={600}>
       <ListOfCars onCarSelect={handleCarSelect} />
 
       {carId && (
@@ -39,6 +36,6 @@ export const CarsPage = () => {
         message={formSuccess}
         onClose={() => setIsModalOpen(false)}
       />
-    </Grid>
+    </Box>
   );
 };

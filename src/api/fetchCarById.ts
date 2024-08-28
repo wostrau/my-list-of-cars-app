@@ -1,4 +1,4 @@
-import { Car } from '../interfaces/car.interface';
+import { Car } from '../interfaces';
 
 export const fetchCarById = async (carId: number): Promise<Car> => {
   const res = await fetch(`/api/cars/${carId}`);

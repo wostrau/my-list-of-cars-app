@@ -1,4 +1,4 @@
-import { PayloadFormData } from '../interfaces/payloadFormData.interface';
+import { PayloadFormData } from '../interfaces/';
 
 export const postMessageToContactUs = async (
   formData: PayloadFormData
